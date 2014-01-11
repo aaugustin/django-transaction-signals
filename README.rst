@@ -96,8 +96,8 @@ together with an earlier savepoint or the entire transaction.
 You cannot use ``pre/post_set_autocommit`` on SQLite. The ``sqlite3`` module
 doesn't work in non-autocommit mode.
 
-You cannot use ``pre/post_savepoint_commit`` on Oracle. Oracle doesn't support
-releasing savepoints.
+You cannot use ``pre/post_savepoint_commit`` on Oracle, MSSQL, or any other
+database that doesn't support releasing savepoints.
 
 This is only the tip of the iceberg. I cannot recommend you use this package
 if you learnt anything in this section. In fact, I cannot recommend it at all.
