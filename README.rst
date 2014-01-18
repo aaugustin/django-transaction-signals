@@ -1,6 +1,15 @@
 django-transaction-signals
 ##########################
 
+tl;dr
+=====
+
+For the common use case of running code after the current transaction is
+successfully committed, use `django-transaction-hooks`__. It has some rough
+edges, but it's sane.
+
+__ https://django-transaction-hooks.readthedocs.org/
+
 Why?
 ====
 
@@ -122,7 +131,7 @@ You may put your custom logic:
 * In a database backend, if you want tight control over database operations.
   Since there's no public API, you'll have to read the source and figure out
   how Django works, rather than blindly hooking to signals that may or may not
-  be sent.
+  be sent. django-transaction-hooks uses this technique.
 
 License
 =======
