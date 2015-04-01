@@ -108,12 +108,13 @@ class TransactionSignalTests(TestCase):
                     with transaction.atomic():
                         self.run_query()
                         raise RuntimeError
-        self.assertEqual(len(signals), 4)
-        # One would expect pre/post_set_autocommit, but, sqlite3, sigh.
+        self.assertEqual(len(signals), 6)
         self.assertEqual('pre_savepoint', signals[0][0])
         self.assertEqual('post_savepoint', signals[1][0])
         self.assertEqual('pre_savepoint_rollback', signals[2][0])
         self.assertEqual('post_savepoint_rollback', signals[3][0])
+        self.assertEqual('pre_savepoint_commit', signals[4][0])
+        self.assertEqual('post_savepoint_commit', signals[5][0])
 
     def test_open_and_set_autocommit_other(self):
         connections['other'].close()
