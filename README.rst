@@ -5,17 +5,20 @@ tl;dr
 =====
 
 For the common use case of running code after the current transaction is
-successfully committed, use `django-transaction-hooks`__. It has some rough
-edges, but it's sane.
+successfully committed:
 
-__ https://django-transaction-hooks.readthedocs.org/
+- on Django >= 1.9, use the built-in on_commit_ hook
+- on Django < 1.9, use `django-transaction-hooks`_
+
+.. _on_commit: https://docs.djangoproject.com/en/dev/topics/db/transactions/#django.db.transaction.on_commit
+.. _django-transaction-hooks: https://django-transaction-hooks.readthedocs.org/
 
 Why?
 ====
 
 Django doesn't provide transaction signals because they're a bad idea. Some of
 the reasons will be apparent in the "Limitations" paragraph below. Other
-reasons can be found in ticket 14051__ and on the django-developers mailing
+reasons can be found in ticket 14051_ and on the django-developers mailing
 list. However, I'm fed up with having this argument. People will shoot
 themselves into the foot anyway.
 
@@ -24,7 +27,7 @@ of transaction signals first-hand.
 
 Use it at your own risk. I wouldn't.
 
-__ https://code.djangoproject.com/ticket/14051
+.. _14051: https://code.djangoproject.com/ticket/14051
 
 How?
 ====
@@ -87,7 +90,7 @@ Limitations
 
 You cannot assume that ``pre/post_commit`` are sent whenever changes are
 committed. Signals aren't sent when the connection is in autocommit mode,
-which is the default__.
+which is the default_.
 
 You cannot assume that ``pre/post_rollback`` are sent whenever changes are
 cancelled. Closing the connection to the database triggers an implicit
@@ -105,13 +108,13 @@ together with an earlier savepoint or the entire transaction.
 You cannot use ``pre/post_set_autocommit`` on SQLite. The ``sqlite3`` module
 doesn't work in non-autocommit mode.
 
-You cannot use ``pre/post_savepoint_commit`` on Oracle, MSSQL, or any other
-database that doesn't support releasing savepoints.
+You cannot use ``pre/post_savepoint_commit`` on Oracle, Microsoft SQL Server,
+or any other database that doesn't support releasing savepoints.
 
 This is only the tip of the iceberg. I cannot recommend you use this package
 if you learnt anything in this section. In fact, I cannot recommend it at all.
 
-__ https://docs.djangoproject.com/en/stable/topics/db/transactions/
+.. _default: https://docs.djangoproject.com/en/stable/topics/db/transactions/
 
 Alternatives
 ============
