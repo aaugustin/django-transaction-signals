@@ -11,7 +11,7 @@ successfully committed:
 - on Django < 1.9, use `django-transaction-hooks`_
 
 .. _on_commit: https://docs.djangoproject.com/en/stable/topics/db/transactions/#django.db.transaction.on_commit
-.. _django-transaction-hooks: https://django-transaction-hooks.readthedocs.org/
+.. _django-transaction-hooks: https://django-transaction-hooks.readthedocs.io/
 
 Why?
 ====
