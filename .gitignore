@@ -1,4 +1,5 @@
+*.egg-info
 *.pyc
+build
 dist
 MANIFEST
-README
