@@ -80,7 +80,7 @@ Savepoint signals:
 - ``post_savepoint_rollback``
 
 ``sender`` is the alias of the database connection e.g. ``'default'``. All
-signals pass the database connection in the ``'connection'`` argument.
+signals pass the database connection in the ``connection`` argument.
 Furthermore,  ``pre/post_open`` provide a ``conn_params`` argument,
 ``pre/post_set_autocommit`` provide ``autocommit``, and
 ``pre/post_savepoint/_commit/_rollback`` provide ``savepoint_id``.
